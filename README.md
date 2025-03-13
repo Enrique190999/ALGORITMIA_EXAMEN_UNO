@@ -24,9 +24,7 @@
 - **Conceptos y estructuras adicionales:**
   - Tablas hash
   - Otras técnicas y estructuras complementarias
-
-## Cómo Utilizar Este Material
-
-1. **Clona el repositorio:**
+  
+## Clona el repositorio:**
    ```bash
    git clone https://github.com/Enrique190999/ALGORITMIA_EXAMEN_UNO.git
