@@ -139,31 +139,40 @@ class Particion:
 
 def kruskal(grafo):
     """
-    Dado un grafo devuelve otro grafo con el árbol expandido mínimo,
+    Dado un grafo representado como un diccionario, devuelve el Árbol de Expansión Mínimo (MST),
     utilizando el algoritmo de Kruskal.
-    Los grafos son diccionario donde las claves son arcos (pares de nodos) y los
-    valores son el peso de los arcos.
+    
+    - El grafo es un diccionario donde:
+      - Las claves son aristas (pares de nodos).
+      - Los valores son los pesos de esas aristas.
+    - El resultado es otro diccionario con las aristas seleccionadas en el MST.
     """
-    # Extraer todos los nodos presentes en el grafo
-    nodes = set()
-    for (u, v) in grafo.keys():
-        nodes.add(u)
-        nodes.add(v)
 
-    # Crear la partición (estructura unión-pertenencia)
-    particion = Particion(nodes)
-    # Ordenar los arcos por peso (de menor a mayor)
-    arcos_ordenados = sorted(grafo.items(), key=lambda item: item[1])
-    mst = {}
+    # Extraer todos los nodos del grafo
+    conjunto_nodos = set()
+    
+    for (nodo1, nodo2) in grafo.keys():
+        conjunto_nodos.add(nodo1)
+        conjunto_nodos.add(nodo2)
 
-    # Recorrer los arcos en orden creciente de peso
-    for (u, v), peso in arcos_ordenados:
-        # Si u y v están en conjuntos diferentes se añade el arco al árbol y se unen.
-        if particion[u] != particion[v]:
-            mst[(u, v)] = peso
-            particion.une(u, v)
-            # Si ya se han añadido n-1 arcos (donde n es el número de nodos), terminamos.
-            if len(mst) == len(nodes) - 1:
+    # Inicializar la estructura de conjuntos disjuntos (Unión-Find)
+    estructura_union = Particion(conjunto_nodos)
+
+    # Ordenar las aristas por peso en orden ascendente
+    aristas_ordenadas = sorted(grafo.items(), key=lambda item: item[1])
+
+    # Diccionario para almacenar el Árbol de Expansión Mínimo (MST)
+    arbol_minimo = {}
+
+    # Recorrer las aristas en orden de menor a mayor peso
+    for (nodo1, nodo2), peso in aristas_ordenadas:
+        # Si los nodos pertenecen a conjuntos diferentes, agregamos la arista al MST
+        if estructura_union.find(nodo1) != estructura_union.find(nodo2):
+            arbol_minimo[(nodo1, nodo2)] = peso
+            estructura_union.une(nodo1, nodo2)  # Unimos los conjuntos
+
+            # Si ya hemos agregado (número de nodos - 1) aristas, el MST está completo
+            if len(arbol_minimo) == len(conjunto_nodos) - 1:
                 break
 
-    return mst
+    return arbol_minimo
