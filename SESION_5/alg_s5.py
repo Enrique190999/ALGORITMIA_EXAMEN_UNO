@@ -145,33 +145,47 @@ def kruskal(grafo):
     - El grafo es un diccionario donde:
       - Las claves son aristas (pares de nodos).
       - Los valores son los pesos de esas aristas.
+      
+    Ejemplo: 
+      grafo = {
+        (1, 2): 3,
+        (1, 3): 1,
+        (2, 3): 2,
+        (2, 4): 4,
+        (3, 4): 5
+    }
+    
+    grafo = { (aristaA, aristaB): pesoAristas }
+
     - El resultado es otro diccionario con las aristas seleccionadas en el MST.
     """
 
     # Extraer todos los nodos del grafo
     conjunto_nodos = set()
     
+    # Agregamos todos las aristas del grafo al set, al ser un set no habrá repetidos IMPORTANTE
     for (nodo1, nodo2) in grafo.keys():
         conjunto_nodos.add(nodo1)
         conjunto_nodos.add(nodo2)
 
-    # Inicializar la estructura de conjuntos disjuntos (Unión-Find)
+    # Instanciamos una partición pasando el set creado anteriormente (iterable)
     estructura_union = Particion(conjunto_nodos)
 
-    # Ordenar las aristas por peso en orden ascendente
+    # Ordenar las aristas por peso (item[1]) y de forma ascendente de menor a mayor
     aristas_ordenadas = sorted(grafo.items(), key=lambda item: item[1])
 
-    # Diccionario para almacenar el Árbol de Expansión Mínimo (MST)
+    # Diccionario para almacenar el Árbol de Expansión Mínimo 
     arbol_minimo = {}
 
     # Recorrer las aristas en orden de menor a mayor peso
     for (nodo1, nodo2), peso in aristas_ordenadas:
-        # Si los nodos pertenecen a conjuntos diferentes, agregamos la arista al MST
+        
+        # Si los nodos pertenecen a conjuntos diferentes, agregamos la arista al arbol de expansion minima
         if estructura_union.find(nodo1) != estructura_union.find(nodo2):
             arbol_minimo[(nodo1, nodo2)] = peso
             estructura_union.une(nodo1, nodo2)  # Unimos los conjuntos
 
-            # Si ya hemos agregado (número de nodos - 1) aristas, el MST está completo
+            # Si ya hemos agregado (número de nodos - 1) aristas, el arbol está completo
             if len(arbol_minimo) == len(conjunto_nodos) - 1:
                 break
 
