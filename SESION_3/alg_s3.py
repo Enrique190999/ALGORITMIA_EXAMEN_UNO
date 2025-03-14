@@ -75,7 +75,7 @@ def algoritmo_mochila_voraz_partida(objetos, peso_soportado):
     # x es cada elemento, 1 1 valor   1 0 peso  (valor/peso)
     peso = 0
     
-    for k, (p,v) in objetos: # peso y valor
+    for k, (p,_) in objetos: # peso y valor
         if peso +p <= peso_soportado:
             candidatos[k] = 1
             peso += p
@@ -84,3 +84,4 @@ def algoritmo_mochila_voraz_partida(objetos, peso_soportado):
             peso += (peso_soportado - peso)
             break
     return candidatos
+

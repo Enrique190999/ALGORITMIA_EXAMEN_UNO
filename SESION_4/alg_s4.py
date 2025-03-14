@@ -201,7 +201,7 @@ def dijkstra(grafo, nodo_inicial):
         # Si encontramos una distancia mayor que la registrada, la ignoramos
         if distancia_actual > distancia_minima[nodo_actual]:
             continue
-
+            
         # Recorremos los nodos vecinos del nodo actual
         for nodo_vecino, peso_arco in grafo[nodo_actual].items():
             nueva_distancia = distancia_minima[nodo_actual] + peso_arco
