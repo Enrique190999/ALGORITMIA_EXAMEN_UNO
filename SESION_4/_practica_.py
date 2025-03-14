@@ -1,33 +1,40 @@
+# Fichero de practica
+
 def numero_nodos(grafo):
     pass
 
 def numero_arcos(grafo):
     pass
 
-def inserta_nodo(nodo,grafo):
+def peso_total(grafo):
     pass
 
-def grado(grafo,nodo, salida = True):
+def arco(grafo, origen, destino):
     pass
 
-def peso_adyacentes(grafo, nodo,salida=True):
+def inserta_nodo(grafo, nodo):
     pass
 
-def inserta_arco(origen, destino, grafo,peso):
+def inserta_arco(grafo, origen, destino, peso=1):
     pass
 
-def arco(origen, destino, grafo):
+def grado(grafo, nodo, salida=True):
     pass
 
-def coste_camino (grafo, camino):
+def pesos_adyacentes(grafo, nodo, salida=True):
     pass
 
-def algoritmo_prim(grafo, inicial = None):
+
+def coste_camino(grafo, camino):
     pass
 
-def algoritmo_dijkstra(grafo, nodo_inicial):
+def prim(grafo, inicial=None):
     pass
 
-def camino_mas_corto(inicial, final,camino_preestablecido):
+def dijkstra(grafo, nodo_inicial):
     pass
-    
+
+
+
+def obten_camino_minimo(inicial, final, caminos_pre_calculados):
+    pass
