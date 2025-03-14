@@ -1,3 +1,10 @@
+# Como va a ser el examen
+El examen cuenta con dos tipos de ejercicios:
+  - Escribir un algoritmo a mano completamente
+  - Modificar de un algoritmo dado su estructura de datos por otra, ejemplo, colas por grafos.
+
+AL 90% entrará algoritmo mochila
+
 ## Contenido
 
 ### Sesión 1: Introducción a la Algoritmia y Estructuras Básicas
