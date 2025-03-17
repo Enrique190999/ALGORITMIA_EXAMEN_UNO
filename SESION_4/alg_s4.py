@@ -208,8 +208,8 @@ def dijkstra(grafo, nodo_inicial):
 
             # Si encontramos un camino más corto hacia el nodo vecino, lo actualizamos
             if nueva_distancia < distancia_minima[nodo_vecino]:
-                distancia_minima[nodo_vecino] = nueva_distancia
                 predecesor[nodo_vecino] = nodo_actual
+                distancia_minima[nodo_vecino] = nueva_distancia
                 heapq.heappush(cola_prioridad, (nueva_distancia, nodo_vecino))
 
     # Construimos el resultado final
