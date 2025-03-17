@@ -17,7 +17,7 @@ def dar_la_vuelta(cambio, valores_monedas):
     Nota: Para evitar el problema de los decimales en python se puede usar la función round() para redondear a dos decimales.
     """
     valores_monedas.sort(reverse=True)
-    i=0
+    
     while cambio > 0:
         
         for valor in valores_monedas:
