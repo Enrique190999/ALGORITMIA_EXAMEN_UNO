@@ -166,6 +166,41 @@ def prim(grafo, inicial=None):
     return arbol
 
 
+def prim_listas(grafo, inicial = None):
+    
+    if grafo is None:
+        return None
+    
+    if inicial is None:
+        inicial = next(iter(grafo))
+    
+    visitados = set([inicial])
+    arbol = {n:{} for n in grafo}
+    cola_prioridad = []
+    
+    for nodo, peso in grafo[inicial].items():
+        cola_prioridad.append((peso,inicial,nodo))
+    
+    cola_prioridad = sorted(cola_prioridad, key= lambda x: x[0])
+    
+    while cola_prioridad and len(visitados) < len(grafo):
+        peso, origen, destino = cola_prioridad.pop(0)
+
+        if destino in visitados:
+            continue
+        
+        visitados.add(destino)
+        arbol[origen][destino] = peso
+        arbol[destino][origen] = peso
+        
+        for nodo_vecino, peso_vecino in grafo[destino].items():
+            if nodo_vecino not in visitados:
+                cola_prioridad.append((peso_vecino, destino, nodo_vecino))
+                cola_prioridad = sorted(cola_prioridad, key=lambda x:x[1])
+    
+    return arbol
+                
+
 import heapq
 
 def dijkstra(grafo, nodo_inicial):
@@ -219,6 +254,36 @@ def dijkstra(grafo, nodo_inicial):
 
     return resultado
 
+def dijkstra_listas(grafo, nodo_inicial):
+    from math import inf
+    
+    if grafo is None:
+        return None
+    
+    if nodo_inicial not in grafo:
+        return None
+    
+    predecesores = {n:None for n in grafo}
+    distancia_minima = {n:float(inf) for n in grafo}
+    cola_prioridad = [(0,nodo_inicial)]
+    distancia_minima[nodo_inicial] = 0
+    while cola_prioridad:
+        distancia, nodo = cola_prioridad.pop(0)
+        
+        if distancia > distancia_minima[nodo]:
+            continue
+            
+        for nodo_vecino, distancia_vecino in grafo[nodo].items():
+            distancia_nueva = distancia_vecino + distancia
+            if distancia_nueva < distancia_minima[nodo_vecino]:
+                predecesores[nodo_vecino] = nodo
+                distancia_minima[nodo_vecino] = distancia_nueva
+                cola_prioridad.append((distancia_nueva,nodo_vecino))
+                cola_prioridad = sorted(cola_prioridad,key= lambda x: x[0])
+    
+    arbol = {}
+    for nodo, distancia in grafo.items():
+        arbol[nodo] = {predecesores if nodo != nodo_inicial else None, distancia_minima[nodo]}
 
 
 def obten_camino_minimo(inicial, final, caminos_pre_calculados):

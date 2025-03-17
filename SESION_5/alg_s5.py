@@ -186,3 +186,39 @@ def kruskal(grafo):
             estructura_union.une(nodo1, nodo2)  # Unir los conjuntos
     
     return arbol_minimo
+
+def kruskal_from_matrix(matrix):
+    """
+    Dado un grafo representado como matriz de adyacencia (lista de listas),
+    donde:
+      - Los nodos se identifican por índices: 0, 1, ..., n-1.
+      - La matriz es simétrica (grafo no dirigido).
+      - Se asume que si no hay arista, el valor es 0 o None.
+    Devuelve un diccionario que representa el árbol de expansión mínima (MST),
+    donde las claves son las aristas (tuplas (i, j)) y los valores son los pesos.
+    """
+    n = len(matrix)
+    # Extraer aristas (solo la parte superior de la matriz para evitar duplicados)
+    arcos = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            if matrix[i][j] not in (0, None):
+                arcos.append(((i, j), matrix[i][j]))
+    # Ordenar las aristas por peso (de menor a mayor)
+    
+    arcos.sort(key=lambda x: x[1])
+    
+    # Inicializar la estructura Unión-Pertenencia con todos los nodos
+    p = Particion(range(n))
+    
+    # Inicializar el MST como un diccionario vacío
+    arbol = {}
+    
+    # Iterar sobre las aristas ordenadas y agregar las que no formen ciclo
+    for (c1, c2), peso in arcos:
+        if p[c1] != p[c2]:
+            p.une(c1, c2)
+            arbol[(c1, c2)] = peso
+    return arbol
+
+

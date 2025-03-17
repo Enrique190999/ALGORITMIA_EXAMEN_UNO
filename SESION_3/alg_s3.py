@@ -34,8 +34,6 @@ def dar_la_vuelta(cambio, valores_monedas):
         else:
             i += 1
         '''
-    pass
-
 # Implementa dar la vuelta utilizando las recomendaciones de la diapositiva 5 de la presentación del tema 2 y comprueba si es más rápido que la implementación básica.
 
 # optimo no es que mia lgoritmo tega la menor complegidad temporal que exista, es buscar una solución perfecta y no hay aleatoriedad
