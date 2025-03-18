@@ -283,7 +283,7 @@ def dijkstra_listas(grafo, nodo_inicial):
     
     arbol = {}
     for nodo, distancia in grafo.items():
-        arbol[nodo] = {predecesores if nodo != nodo_inicial else None, distancia_minima[nodo]}
+        arbol[nodo] = (predecesores if nodo != nodo_inicial else None, distancia_minima[nodo])
 
 
 def obten_camino_minimo(inicial, final, caminos_pre_calculados):
