@@ -111,4 +111,15 @@ class Hanoi:
         casos.
         """
         
+        '''
+            PASOS A TOMAR
+            Ta todos los discos
+            Tb - 
+            Tc -
+            
+            Ta - todos menos pequeño
+            Tb - disco pequeño vuelve el pequeño al a
+            Tc - 
+        '''
+        
         pass

@@ -181,6 +181,7 @@ def kruskal(grafo):
     while cola_prioridad and len(arbol_minimo) < len(conjunto_nodos) - 1:
         peso, nodo1, nodo2 = heapq.heappop(cola_prioridad)
         # Si los nodos pertenecen a conjuntos diferentes, agregamos la arista al MST
+        # if estructura_union[nodo1] != estructura_union[nodo2]:
         if estructura_union.find(nodo1) != estructura_union.find(nodo2):
             arbol_minimo[(nodo1, nodo2)] = peso
             estructura_union.une(nodo1, nodo2)  # Unir los conjuntos
@@ -204,8 +205,8 @@ def kruskal_from_matrix(matrix):
         for j in range(i + 1, n):
             if matrix[i][j] not in (0, None):
                 arcos.append(((i, j), matrix[i][j]))
+                
     # Ordenar las aristas por peso (de menor a mayor)
-    
     arcos.sort(key=lambda x: x[1])
     
     # Inicializar la estructura Unión-Pertenencia con todos los nodos

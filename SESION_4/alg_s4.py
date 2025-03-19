@@ -266,7 +266,10 @@ def dijkstra_listas(grafo, nodo_inicial):
     predecesores = {n:None for n in grafo}
     distancia_minima = {n:float(inf) for n in grafo}
     cola_prioridad = [(0,nodo_inicial)]
+    cola_prioridad = sorted(cola_prioridad.items(), key = lambda x: x[0])
+    
     distancia_minima[nodo_inicial] = 0
+    
     while cola_prioridad:
         distancia, nodo = cola_prioridad.pop(0)
         
@@ -275,6 +278,7 @@ def dijkstra_listas(grafo, nodo_inicial):
             
         for nodo_vecino, distancia_vecino in grafo[nodo].items():
             distancia_nueva = distancia_vecino + distancia
+            
             if distancia_nueva < distancia_minima[nodo_vecino]:
                 predecesores[nodo_vecino] = nodo
                 distancia_minima[nodo_vecino] = distancia_nueva
